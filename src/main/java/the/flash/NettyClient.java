@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 客户端启动流程
  * @author 闪电侠
  */
 public class NettyClient {
@@ -27,7 +28,7 @@ public class NettyClient {
                 .group(workerGroup)
                 // 2.指定 IO 类型为 NIO
                 .channel(NioSocketChannel.class)
-                // 绑定自定义属性到 channel
+                // 绑定自定义属性到 channel ;通过`channel.attr()`取出这个属性
                 .attr(AttributeKey.newInstance("clientName"), "nettyClient")
                 // 设置TCP底层属性
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
@@ -44,6 +45,13 @@ public class NettyClient {
         connect(bootstrap, "juejin.im", 80, MAX_RETRY);
     }
 
+    /**
+     * 服务连接
+     * @param bootstrap
+     * @param host
+     * @param port
+     * @param retry
+     */
     private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
@@ -54,8 +62,10 @@ public class NettyClient {
                 // 第几次重连
                 int order = (MAX_RETRY - retry) + 1;
                 // 本次重连的间隔
+                // 通过一个指数退避的方式，比如每隔 1 秒、2 秒、4 秒、8 秒，以 2 的幂次来建立连接
                 int delay = 1 << order;
                 System.err.println(new Date() + ": 连接失败，第" + order + "次重连……");
+                //定时任务，指定时间后重试;调 `workerGroup` 的 `schedule` 方法即可实现定时任务逻辑
                 bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
                         .SECONDS);
             }
