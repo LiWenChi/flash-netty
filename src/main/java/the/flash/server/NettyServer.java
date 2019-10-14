@@ -32,7 +32,7 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
 //                        ch.pipeline().addLast(new FirstServerHandler());
-                        ch.pipeline().addLast(new Spliter());
+                        ch.pipeline().addLast(new Spliter()); //加入自定义基于长度域拆包器
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
