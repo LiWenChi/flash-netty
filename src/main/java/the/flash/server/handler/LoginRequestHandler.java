@@ -7,6 +7,15 @@ import the.flash.protocol.response.LoginResponsePacket;
 
 import java.util.Date;
 
+/**
+ * SimpleChannelInboundHandler<LoginRequestPacket>
+ *     传入Handler处理的对应Packet的泛型
+ *
+ * 需不需手动通过if else判断，去判断Packet的类型
+ * Netty 基于这种考虑抽象出了一个 `SimpleChannelInboundHandler` 对象，
+ * 类型判断和对象传递的活都自动帮我们实现了，而我们可以专注于处理我们所关心的指令即可Netty
+ * 基于这种考虑抽象出了一个 `SimpleChannelInboundHandler` 对象，类型判断和对象传递的活都自动帮我们实现了，而我们可以专注于处理我们所关心的指令即可
+ */
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) {

@@ -19,6 +19,9 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         loginRequestPacket.setUsername("flash");
         loginRequestPacket.setPassword("pwd");
 
+        //序列化
+        /**不需要将Java对象序列化为ByteBuf对象，使用PacketEncoder代替，让Netty自带的handler进行管理*/
+
         // 写数据
         ctx.channel().writeAndFlush(loginRequestPacket);
     }
