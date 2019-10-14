@@ -5,6 +5,9 @@ import the.flash.protocol.Packet;
 
 import static the.flash.protocol.command.Command.MESSAGE_RESPONSE;
 
+/**
+ * 服务端发送消息到客户端消息对象
+ */
 @Data
 public class MessageResponsePacket extends Packet {
 

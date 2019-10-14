@@ -33,6 +33,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
             loginResponsePacket.setVersion(packet.getVersion());
             if (valid(loginRequestPacket)) {
+                //是一个正确的登录相应数据包
+
                 loginResponsePacket.setSuccess(true);
                 System.out.println(new Date() + ": 登录成功!");
             } else {
@@ -40,13 +42,17 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 loginResponsePacket.setSuccess(false);
                 System.out.println(new Date() + ": 登录失败!");
             }
+
             // 登录响应
             ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc(), loginResponsePacket);
             ctx.channel().writeAndFlush(responseByteBuf);
         } else if (packet instanceof MessageRequestPacket) {
+            //已经登录
+
             // 客户端发来消息
             MessageRequestPacket messageRequestPacket = ((MessageRequestPacket) packet);
 
+            //服务端返回给客户端的消息
             MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
             System.out.println(new Date() + ": 收到客户端消息: " + messageRequestPacket.getMessage());
             messageResponsePacket.setMessage("服务端回复【" + messageRequestPacket.getMessage() + "】");
@@ -55,6 +61,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
+    /**
+     * 验证登录请求数据包数据是否正确
+     * @param loginRequestPacket 客户端发送给服务端的登录请求数据包
+     * @return
+     */
     private boolean valid(LoginRequestPacket loginRequestPacket) {
         return true;
     }
