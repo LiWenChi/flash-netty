@@ -81,6 +81,7 @@ public class NettyClient {
         new Thread(() -> {
             while (!Thread.interrupted()) {
                 if (!SessionUtil.hasLogin(channel)) {
+                    //在控制台输入消息接收方的 userId，然后输入一个空格
                     System.out.print("输入用户名登录: ");
                     String username = sc.nextLine();
                     loginRequestPacket.setUserName(username);

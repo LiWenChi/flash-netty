@@ -8,9 +8,13 @@ import the.flash.protocol.response.MessageResponsePacket;
 import the.flash.session.Session;
 import the.flash.util.SessionUtil;
 
+/**
+ * 服务端消息处理Handler
+ */
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket) {
+
         // 1.拿到消息发送方的会话信息
         Session session = SessionUtil.getSession(ctx.channel());
 
@@ -25,6 +29,7 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
 
         // 4.将消息发送给消息接收方
         if (toUserChannel != null && SessionUtil.hasLogin(toUserChannel)) {
+            //如果对应的channel和session存在，则发送消息
             toUserChannel.writeAndFlush(messageResponsePacket);
         } else {
             System.err.println("[" + messageRequestPacket.getToUserId() + "] 不在线，发送失败!");
