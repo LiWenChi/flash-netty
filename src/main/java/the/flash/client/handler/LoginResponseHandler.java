@@ -33,6 +33,10 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         }
     }
 
+    /**
+     * 当此handler未被注册，则会调用该方法
+     * @param ctx
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         System.out.println("客户端连接被关闭!");

@@ -35,7 +35,10 @@ public class NettyServer {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        //使用Netty的pipeline机制避免重复的登录认证
+                        //后续的header都会经过此header的过滤
                         ch.pipeline().addLast(new AuthHandler());
+
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
