@@ -42,6 +42,11 @@ public class SessionUtil {
         return userIdChannelMap.get(userId);
     }
 
+    /**
+     * 绑定channelGroup到session中
+     * @param groupId
+     * @param channelGroup
+     */
     public static void bindChannelGroup(String groupId, ChannelGroup channelGroup) {
         groupIdChannelGroupMap.put(groupId, channelGroup);
     }

@@ -30,9 +30,12 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
                         ch.pipeline().addLast(new Spliter());
+                        //使用单例模式改造无状态的Header
+                        //这样的话，每来一次新的连接，添加 handler 的时候就不需要每次都 new 了
                         ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
+                        //对平行的handler进行合并
                         ch.pipeline().addLast(IMHandler.INSTANCE);
                     }
                 });

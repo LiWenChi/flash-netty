@@ -11,6 +11,10 @@ import the.flash.util.SessionUtil;
 
 import java.util.Date;
 
+/**
+ * 单例化登录Header
+ */
+////如果一个 handler 要被多个 channel 进行共享，必须要加上 `@ChannelHandler.Sharable` 显示地告诉 Netty，这个 handler 是支持多个 channel 共享的
 @ChannelHandler.Sharable
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
 

@@ -6,6 +6,9 @@ import the.flash.protocol.Packet;
 
 import static the.flash.protocol.command.Command.GROUP_MESSAGE_REQUEST;
 
+/**
+ * 群消息数据包
+ */
 @Data
 @NoArgsConstructor
 public class GroupMessageRequestPacket extends Packet {
