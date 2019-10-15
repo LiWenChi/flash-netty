@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * 管理控制台执行指令
+ */
 public class ConsoleCommandManager implements ConsoleCommand {
     private Map<String, ConsoleCommand> consoleCommandMap;
 
@@ -17,8 +20,14 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
     }
 
+    /**
+     * 控制台执行指令
+     * @param scanner 控制台内容
+     * @param channel 对应的数据传输channel
+     */
     @Override
     public void exec(Scanner scanner, Channel channel) {
+
         //  获取第一个指令
         String command = scanner.next();
 
@@ -26,6 +35,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
             return;
         }
 
+        //根据指令执行具体的操作
         ConsoleCommand consoleCommand = consoleCommandMap.get(command);
 
         if (consoleCommand != null) {

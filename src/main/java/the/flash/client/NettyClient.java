@@ -78,7 +78,12 @@ public class NettyClient {
         });
     }
 
+    /**
+     * 启动控制台线程
+     * @param channel
+     */
     private static void startConsoleThread(Channel channel) {
+
         ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
         Scanner scanner = new Scanner(System.in);
