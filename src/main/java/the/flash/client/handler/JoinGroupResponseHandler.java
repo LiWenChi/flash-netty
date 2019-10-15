@@ -4,6 +4,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import the.flash.protocol.response.JoinGroupResponsePacket;
 
+/**
+ * 处理服务端加入群聊的相应结果
+ */
 public class JoinGroupResponseHandler extends SimpleChannelInboundHandler<JoinGroupResponsePacket> {
 
     @Override

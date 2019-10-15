@@ -15,8 +15,11 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());
         consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
+        //将加入群聊指令加入Map
         consoleCommandMap.put("joinGroup", new JoinGroupConsoleCommand());
+        //加入退群指令到Mao中
         consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
+        //加入获取群成员列表指令到Mao中
         consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
     }
 

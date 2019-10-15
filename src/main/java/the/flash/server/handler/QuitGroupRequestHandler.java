@@ -7,11 +7,16 @@ import the.flash.protocol.request.QuitGroupRequestPacket;
 import the.flash.protocol.response.QuitGroupResponsePacket;
 import the.flash.util.SessionUtil;
 
+/**
+ * 服务端处理客户端的退群指令
+ */
 public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket requestPacket) {
+
         // 1. 获取群对应的 channelGroup，然后将当前用户的 channel 移除
         String groupId = requestPacket.getGroupId();
+        //将当前客户端的channel移除
         ChannelGroup channelGroup = SessionUtil.getChannelGroup(groupId);
         channelGroup.remove(ctx.channel());
 

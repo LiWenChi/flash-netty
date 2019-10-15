@@ -4,6 +4,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import the.flash.protocol.response.ListGroupMembersResponsePacket;
 
+/**
+ * 客户端处理服务端对获取成员列表的相应
+ */
 public class ListGroupMembersResponseHandler extends SimpleChannelInboundHandler<ListGroupMembersResponsePacket> {
 
     @Override

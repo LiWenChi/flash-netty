@@ -5,6 +5,9 @@ import the.flash.protocol.request.ListGroupMembersRequestPacket;
 
 import java.util.Scanner;
 
+/**
+ * 控制台获取群成员列表的指令
+ */
 public class ListGroupMembersConsoleCommand implements ConsoleCommand {
 
     @Override

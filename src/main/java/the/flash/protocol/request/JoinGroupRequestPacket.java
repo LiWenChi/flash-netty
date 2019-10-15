@@ -5,6 +5,9 @@ import the.flash.protocol.Packet;
 
 import static the.flash.protocol.command.Command.JOIN_GROUP_REQUEST;
 
+/**
+ * 加入群联的数据包
+ */
 @Data
 public class JoinGroupRequestPacket extends Packet {
 

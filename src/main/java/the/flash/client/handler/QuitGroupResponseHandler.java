@@ -4,7 +4,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import the.flash.protocol.response.QuitGroupResponsePacket;
 
-
+/**
+ * 客户端处理服务端退出群聊的相应指令
+ */
 public class QuitGroupResponseHandler extends SimpleChannelInboundHandler<QuitGroupResponsePacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupResponsePacket responsePacket) {

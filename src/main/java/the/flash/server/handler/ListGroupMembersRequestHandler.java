@@ -12,9 +12,13 @@ import the.flash.util.SessionUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 服务端处理群成员列表请求
+ */
 public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<ListGroupMembersRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ListGroupMembersRequestPacket requestPacket) {
+
         // 1. 获取群的 ChannelGroup
         String groupId = requestPacket.getGroupId();
         ChannelGroup channelGroup = SessionUtil.getChannelGroup(groupId);
@@ -22,6 +26,7 @@ public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<
         // 2. 遍历群成员的 channel，对应的 session，构造群成员的信息
         List<Session> sessionList = new ArrayList<>();
         for (Channel channel : channelGroup) {
+            //获取各个channel中的session信息(userId userName)
             Session session = SessionUtil.getSession(channel);
             sessionList.add(session);
         }
